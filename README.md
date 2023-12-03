@@ -1,5 +1,9 @@
 Launching Flutter app on Android in a new popup window via `ACTION_PROCESS_TEXT` received from external app. The typical use case is selecting a word in browser (i.e. Chrome) and getting a list of shortcuts (i.e. Copy, Search) and few extra options (such us Translate):
 
+![image](https://github.com/maxim-saplin/test_popup_android/assets/7947027/3c9856dd-95b9-4930-a520-675c1454c3c8)
+
+![image](https://github.com/maxim-saplin/test_popup_android/assets/7947027/4d5b5bce-3e5a-40a3-8872-d3f731250f91)
+
 An alternative to picture-in-picture or overlay.
 
 Pros:
