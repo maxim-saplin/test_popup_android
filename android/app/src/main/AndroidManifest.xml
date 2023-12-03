@@ -3,6 +3,15 @@
         android:label="test_popup_android"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <activity android:name=".TextActivity"
+            android:exported="true"
+            android:label="PPUP" android:theme="@style/LaunchTheme">
+            <intent-filter android:label="PPUP">
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <data android:mimeType="text/plain"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -16,19 +25,19 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
-            <layout
-                android:defaultHeight="640dp"
-                android:defaultWidth="360dp"
-                android:gravity="center" />
+<!--            <layout-->
+<!--                android:defaultHeight="640dp"-->
+<!--                android:defaultWidth="360dp"-->
+<!--                android:gravity="center" />-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <intent-filter android:label="PPUP">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <data android:mimeType="text/plain"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+<!--            <intent-filter android:label="PPUP">-->
+<!--                <action android:name="android.intent.action.PROCESS_TEXT" />-->
+<!--                <data android:mimeType="text/plain"/>-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

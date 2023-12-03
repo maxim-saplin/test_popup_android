@@ -1,6 +1,6 @@
 package com.example.test_popup_android
 
-import android.content.Intent
+import android.app.ActivityManager
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -16,8 +16,8 @@ class MainActivity: FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "!!!!! onCreate $intent")
-        var selectedText= ""
-        var actionProcessText = false
+
+        //var actionProcessText = false
         val startedInMultiWindow = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             isInMultiWindowMode
         } else {
@@ -31,32 +31,22 @@ class MainActivity: FlutterActivity() {
             false
         }
 
-        if (intent.action == Intent.ACTION_PROCESS_TEXT) {
-            selectedText = intent.getStringExtra("android.intent.extra.PROCESS_TEXT")!!
+        val selectedText = intent.getStringExtra("android.intent.extra.PROCESS_TEXT") ?: ""
+
+        if (selectedText.isNotEmpty()) {
             Log.d("MainActivity", "!!! ACTION_PROCESS_TEXT $selectedText")
-//            val popupIntent = Intent(this, MainActivity::class.java).apply {
-//                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT)
-//            }
-//            startActivity(popupIntent)
-            actionProcessText = true
         }
+
+        val activityManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        val isLowRamDevice = activityManager.isLowRamDevice
 
         MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, channelName).invokeMethod(
                 "sendParams",
                 mapOf("selectedText" to selectedText,
-                        "actionProcessText" to actionProcessText,
+//                        "actionProcessText" to actionProcessText,
                         "deviceFreeFormSupported" to deviceFreeFormSupported,
-                        "startedInMultiWindow" to startedInMultiWindow
+                        "startedInMultiWindow" to startedInMultiWindow,
+                        "isLowRamDevice" to isLowRamDevice
                 ))
-
-        // MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
-        //     if (call.method == "returnSelectedText") {
-        //         val selectedText = call.argument<String>("text")
-        //         // Do something with the selected text
-        //         result.success(selectedText)
-        //     } else {
-        //         result.notImplemented()
-        //     }
-        // }
     }
 }
