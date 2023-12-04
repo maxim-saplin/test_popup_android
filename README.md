@@ -7,6 +7,7 @@ Launching Flutter app on Android in a new popup window via `ACTION_PROCESS_TEXT`
 An alternative to picture-in-picture or overlay.
 
 Pros:
+ - No need in `draw over other apps` permission
  - Easier to implement
  - Standard window controls (close, maximize)
 
